@@ -1,2 +1,32 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 .invalid-feedback{display: block !important}
+.check_stt{
+	cursor: pointer;
+}
+.clear10{
+	clear: both;
+	height: 10px;
+}
+.text-min{
+	max-width: 400px;
+}
+.inline-block{
+	display: inline-block !important;
+}
+.text-min input[type="text"]{
+	width: calc(100% - 86px) !important;
+	display: inline-block !important;
+	height: 41px;
+	margin-right: -3px;
+}
+.t-center{
+	margin:10px 0px;
+	text-align: center;
+}
+.pagination{
+	text-align: center;
+	display: block !important
+}
+.pagination li{
+	display: inline-block !important;
+}

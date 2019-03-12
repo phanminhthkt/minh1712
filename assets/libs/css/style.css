@@ -1241,7 +1241,7 @@ Top Header
     font-size: 30px;
     text-transform: uppercase;
     font-weight: 700;
-    color: #007bff;
+    color: #fff;
 }
 .navbar-brand:hover{
     color: #007bff;
@@ -1805,38 +1805,38 @@ Leftsidebar - dark
 ------------------------- */
 
 .sidebar-dark {
-    background-color: #0e0c28;
+    background-color: #364150;
     -webkit-box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
     box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
     -webkit-transition: all 0.3s ease;
 }
 
 .sidebar-dark .nav-divider {
-    color: #a4aadb;
+    color: #fff;
     font-size: 12px;
     letter-spacing: 1px;
 }
 
 .sidebar-dark.nav-left-sidebar .nav-link i {
-    color: #7a80b4;
+    color: #32c5d2;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-item {}
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link {
-    color: #7a80b4;
+    color: #ababab;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link:focus,
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link:hover {
     color: #fff;
-    background-color: #242849;
+    background-color: #22282f;
     border-radius: 2px;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link:focus,
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link.active {
-    background-color: #242849;
+    background-color: #22282f;
     color: #fff;
     border-radius: 2px;
 }
@@ -1938,6 +1938,7 @@ Container / Wrapper
     min-height: 100%;
     padding-top: 60px;
     position: relative;
+    font-family: arial;
 }
 
 .dashboard-wrapper {
@@ -1996,7 +1997,8 @@ Pageheader
 -------------------------*/
 
 .page-header {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    margin-left: 5px;
 }
 
 .page-breadcrumb {}
@@ -4105,7 +4107,7 @@ Pills vertical
     border-radius: 100%;
     padding: 4px;
     display: inline-block;
-    margin-right: 3px;
+    /* margin-right: 3px; */
 }
 
 .label {
@@ -4512,8 +4514,9 @@ Pills vertical
 
 .table thead th,
 .table th {
-    color: #3d405c;
-    font-family: 'Circular Std Medium';
+    color: #fff;
+    font-family: arial;
+    font-size: 13px;
 }
 
 .table-bordered {
@@ -6978,9 +6981,9 @@ Media Query
 @media only screen and (max-width:320px) {}
 .w-40-np{
     width: 35px !important;
-    padding: 8px !important;
-    float: left;
-    display: flex;
+    padding: 5px 8px!important;
+    /* float: left; */
+    /* display: flex; */
     align-items: center;
     justify-content: center;
     margin: 2px;
@@ -6989,6 +6992,7 @@ Media Query
     width: 15px;
     height: 15px;
     text-align: center;
+    display: inline-block;
 }
         .inputfile {
     width: 0.1px;

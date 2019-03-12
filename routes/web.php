@@ -40,6 +40,10 @@ Route::group(['as' =>'Backend','namespace' => 'Backend'], function(){
 			'as' => '.Product.update',
 			'uses' => 'ProductController@update'
 		]);
+		Route::post('/admin/product/ajax_status',[
+			'as' => '.Product.ajax',
+			'uses' => 'ProductController@ajax_status'
+		]);
 		/*End Product */
 		// Route::resource('product','ProductController');
 	});

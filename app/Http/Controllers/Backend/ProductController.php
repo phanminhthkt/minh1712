@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\product;
 use Illuminate\Http\Request;
+use App\Http\Requests\CheckDeleteAll;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Response;
+
 class ProductController extends Controller
 {
     /**
@@ -70,7 +73,12 @@ class ProductController extends Controller
      */
     public function show(request $request)
     {
-        $data = DB::table('table_product')->orderBy('id','desc')->get();
+        if($request->search){
+            $data = DB::table('table_product')->orderBy('id','desc')->paginate(15);
+        }else{
+            $data = DB::table('table_product')->orderBy('id','desc')->paginate(15);
+        }
+        
         return view('Backend.Product.index', ['data' => $data]);
     }
 
@@ -96,17 +104,23 @@ class ProductController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
-        $data = DB::table('table_product')->where('id',$id)->first();
-        if(file_exists(public_path('../upload/product/'.$data->images))){
-            File::delete(public_path('../upload/product/'.$data->images));
+        $data = DB::table('table_product')->select('images')->where('id',$id)->first();
+        
+        if($request->file('images')){
+            if(file_exists(public_path('../upload/product/'.$data->images))){
+                File::delete(public_path('../upload/product/'.$data->images));
+            }
+            $fileExtension = $request->file('images')->getClientOriginalExtension(); // Lấy đuôi của file
+            // Filename cực shock để khỏi bị trùng
+            $fileName = time() . "_" . rand(0,9999999) . "_" . md5(rand(0,9999999)) . "." . $fileExtension;
+            // Thư mục upload
+            $uploadPath = public_path('../upload/product'); // Thư mục upload
+            // Bắt đầu chuyển file vào thư mục
+            $request->file('images')->move($uploadPath, $fileName);
+        }else{
+            $fileName = $data->images;
         }
-        $fileExtension = $request->file('images')->getClientOriginalExtension(); // Lấy đuôi của file
-        // Filename cực shock để khỏi bị trùng
-        $fileName = time() . "_" . rand(0,9999999) . "_" . md5(rand(0,9999999)) . "." . $fileExtension;
-        // Thư mục upload
-        $uploadPath = public_path('../upload/product'); // Thư mục upload
-        // Bắt đầu chuyển file vào thư mục
-        $request->file('images')->move($uploadPath, $fileName);
+        
         DB::table('table_product')->where("id",$id)->update(
             [
                 'images' =>$fileName,
@@ -142,16 +156,28 @@ class ProductController extends Controller
         }
         
     }
-    public function delete_all(request $request){
-        try{
-            foreach($request->listid as $id){
-                DB::table('table_product')->where('id',$id)->delete();
+    public function delete_all(CheckDeleteAll $request){
+        $data = DB::table('table_product')->select('images')->whereIn('id',$request->listid)->get();
+        foreach($data as $id){
+            if(file_exists(public_path('../upload/product/'.$data->images))){
+                File::delete(public_path('../upload/product/'.$data->images));
             }
-            return redirect()->route('Backend.Product.index');
-        }catch(Exception $e){
-
+            DB::table('table_product')->where('id',$id)->delete();
         }
-
+        DB::table('table_product')->whereIn('id',$request->listid)->delete();
+        return redirect()->route('Backend.Product.index')->with('success','Xoá dữ liệu thành công');
+    }
+    public function ajax_status(request $request){
+        $data = DB::table('table_product')->where('id',$request->id)->first();
+        if($data->status == 1){
+            DB::table('table_product')->where("id",$request->id)->update(['status' =>0]);
+            $msg = '<span class="fas fa-times-circle badge-dot badge-danger"></span>';
+            echo $msg;
+        }else{
+            DB::table('table_product')->where("id",$request->id)->update(['status' =>1]);
+            $msg = '<span class="fas fa-check-circle badge-dot badge-primary"></span>';
+            echo $msg;
+        }
     }
 
 }
