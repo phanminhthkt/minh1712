@@ -71,14 +71,14 @@ class ProductController extends Controller
      * @param  \App\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(request $request)
+    public function searchByName(request $request)
     {
-        if($request->search){
-            $data = DB::table('table_product')->orderBy('id','desc')->paginate(15);
-        }else{
-            $data = DB::table('table_product')->orderBy('id','desc')->paginate(15);
-        }
-        
+        $data = DB::table('table_product')->where('name_vi', 'like', '%'.$request->keywords.'%')->orderBy('id','desc')->paginate(15);
+        return view('Backend.Product.index', ['data' => $data]);
+    }
+    public function show()
+    {
+        $data = DB::table('table_product')->orderBy('id','desc')->paginate(15);
         return view('Backend.Product.index', ['data' => $data]);
     }
 

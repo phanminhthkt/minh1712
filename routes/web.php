@@ -25,6 +25,10 @@ Route::group(['as' =>'Backend','namespace' => 'Backend'], function(){
 		    'as' => '.Product.index',
 		    'uses' => 'ProductController@show'
 		]);
+		Route::post('/admin/product/search/{keywords}',[
+		    'as' => '.Product.searchByName',
+		    'uses' => 'ProductController@searchByName'
+		]);
 		/*Thực  thi add*/
 		Route::post('/admin/product/','ProductController@store')->name('.Product.store');
 		/*Show view add product */
@@ -48,8 +52,6 @@ Route::group(['as' =>'Backend','namespace' => 'Backend'], function(){
 		// Route::resource('product','ProductController');
 	});
 });
-
-
 // Route::get('dang-nhap.html','UserController@getLogin')->name('login');
 // Route::post('dang-nhap.html','UserController@postLogin');
 // Route::get('dang-nhap-thanh-cong.html','LoginSuccessController@index')->middleware('Check_loginsuccess')->name("Userinfo");

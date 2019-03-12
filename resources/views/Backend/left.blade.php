@@ -40,7 +40,7 @@
 								<li class="nav-item">
 									<a class="nav-link" href="{{route('Backend.Product.index',['type'=>'product'])}}">Product cấp 1</a>
 									<a class="nav-link" href="{{route('Backend.Product.index')}}">Product cấp 2</a>
-									<a class="nav-link" href="{{route('Backend.Product.index')}}">Product</a>
+									<a class="nav-link" href="{{route('Backend.Product.index',['type'=>'product'])}}">Product</a>
 								</li>
 							</ul>
 						</div>
