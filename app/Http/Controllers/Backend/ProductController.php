@@ -8,6 +8,7 @@ use App\Http\Requests\CheckDeleteAll;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Yajra\Datatables\Datatables;
 use Response;
 
 class ProductController extends Controller
@@ -73,15 +74,29 @@ class ProductController extends Controller
      */
     public function searchByName(request $request)
     {
-        $data = DB::table('table_product')->where('name_vi', 'like', '%'.$request->keywords.'%')->orderBy('id','desc')->paginate(15);
-        return view('Backend.Product.index', ['data' => $data]);
+        // $perPage =15;
+        // if($request->page){
+        //     $number = $request->page; 
+
+        // }else{
+        //     $number = 1;
+        // }
+        // $start = 
+        $data = DB::table('table_product')->where('name_vi', 'like', '%'.$request->keywords.'%')->orderBy('id','desc')->paginate(1);
+        return view('Backend.Product.index', ['data' => $data,'keywords'=>$request->keywords]);
     }
     public function show()
     {
-        $data = DB::table('table_product')->orderBy('id','desc')->paginate(15);
-        return view('Backend.Product.index', ['data' => $data]);
+        $data = DB::table('table_product')->orderBy('id','desc')->paginate(1);
+        // $data = DB::table('table_product')->orderBy('id','desc')->paginate(1);
+        return view('Backend.Product.index',['data'=>$data]);
     }
-
+    /*Dùng data table */
+    public function ShowData()
+    {
+        $data = DB::table('table_product')->select(["id","name_vi","quantity","price","status"]);
+        return Datatables::of($data)->make(true);
+    }
     /**
      * Show the form for editing the specified resource.
      *

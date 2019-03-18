@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="{{asset('assets/vendor/charts/c3charts/c3.css')}}">
         <link rel="stylesheet" href="{{asset('assets/vendor/fonts/flag-icon-css/flag-icon.min.css')}}">
         <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+        <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
     </head>
     <body>

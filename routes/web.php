@@ -25,11 +25,18 @@ Route::group(['as' =>'Backend','namespace' => 'Backend'], function(){
 		    'as' => '.Product.index',
 		    'uses' => 'ProductController@show'
 		]);
-		Route::post('/admin/product/search/{keywords}',[
+		/*Show datatable product */
+		Route::get('/admin/product/showdata','ProductController@ShowData')->name(".ShowData");
+		/* */
+		Route::put('/admin/product/search',[
 		    'as' => '.Product.searchByName',
 		    'uses' => 'ProductController@searchByName'
 		]);
-		/*Thực  thi add*/
+		Route::get('/admin/product/search',[
+		    'as' => '.Product.searchByName',
+		    'uses' => 'ProductController@searchByName'
+		]);
+				/*Thực  thi add*/
 		Route::post('/admin/product/','ProductController@store')->name('.Product.store');
 		/*Show view add product */
 		Route::get('/admin/product/add','ProductController@create');
